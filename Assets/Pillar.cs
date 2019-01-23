@@ -14,18 +14,20 @@ public enum PillarStates
 
 public class Pillar : MonoBehaviour
 {
+    [HideInInspector]
     public PillarStates m_state;
 
-    public bool IsDestructing
-    {
-        get { return (m_state > 0); }
-    }
+    public SpriteRenderer m_spriteRenderer;
+    public Sprite[] m_sprites;
+
+    public bool IsDestructing { get { return (m_state > 0); } }
 
     private float m_destructDuration = 2f;
     private float m_destructTime;
 
     void Start()
     {
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
         ResetDestructTime();
     }
 
@@ -36,29 +38,42 @@ public class Pillar : MonoBehaviour
             m_destructTime -= Time.deltaTime;
             if (m_destructTime <= 0)
             {
-                m_state = m_state + 1;
+                NextState();
                 Debug.Log(m_state);
                 m_destructTime = m_destructDuration;
             }
         }
 
-        if (GetComponent<SpriteRenderer>() != null)
-            GetComponent<SpriteRenderer>().color = new Color(
-                GetComponent<SpriteRenderer>().color.r,
-                GetComponent<SpriteRenderer>().color.g,
-                GetComponent<SpriteRenderer>().color.b,
+        /*
+        if (m_spriteRenderer != null)
+            m_spriteRenderer.color = new Color(
+                m_spriteRenderer.color.r,
+                m_spriteRenderer.color.g,
+                m_spriteRenderer.color.b,
                 1 - ((float)m_state/((float)PillarStates.Count-1)));
+        */
         //Debug.Log(((1/5)));
     }
 
     public void TriggerDestruction()
     {
-        m_state = PillarStates.Cracked;
+        NextState();
+    }
+
+    private void NextState()
+    {
+        m_state = m_state + 1;
+        if (m_state != PillarStates.Destroyed)
+            m_spriteRenderer.sprite = m_sprites[(int)m_state];
+        else
+            m_spriteRenderer.color = Color.clear;
     }
 
     public void Repair()
     {
         m_state = PillarStates.Intact;
+        m_spriteRenderer.sprite = m_sprites[0];
+        m_spriteRenderer.color = Color.white;
     }
 
     public void ResetDestructTime()

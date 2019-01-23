@@ -92,3 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9226401fc63b04cb618f547dfaa78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_state: 0
+  m_sprites:
+  - {fileID: 21300000, guid: c3fbb94f0327d3b41af037ff2779b258, type: 3}
+  - {fileID: 21300000, guid: 3e6e9b94c86235d41b53f53b80e00a0c, type: 3}
+  - {fileID: 21300000, guid: 5c5b380919732004d8ce373491214d01, type: 3}
+  - {fileID: 21300000, guid: 3589235788b60134b9e57eff2e8c638d, type: 3}

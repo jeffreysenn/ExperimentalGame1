@@ -23,6 +23,18 @@ public class PillarManager : MonoBehaviour
             m_activationTime = 0;
             CrackRandomPillar();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            RepairAllPillars();
+
+    }
+
+    void RepairAllPillars()
+    {
+        foreach(Pillar m_pillar in m_pillars)
+        {
+            m_pillar.Repair();
+        }
     }
 
     void CrackRandomPillar()
