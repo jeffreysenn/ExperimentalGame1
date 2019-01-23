@@ -22,6 +22,8 @@ public class Pillar : MonoBehaviour
 
     public bool IsDestructing { get { return (m_state > 0); } }
 
+    public Vector2 pillarNumRow;
+
     private float m_destructDuration = 2f;
     private float m_destructTime;
 

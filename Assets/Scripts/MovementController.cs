@@ -8,6 +8,7 @@ public struct SpriteInfo
     public GameObject Sprite;
     public Vector2 NumAndRoll;
     public bool IsActive;
+    public Vector2 PillarNumRoll;
 }
 
 public class MovementController : MonoBehaviour
@@ -75,4 +76,6 @@ public class MovementController : MonoBehaviour
         sprites[newVisibleNum].Sprite.GetComponent<Renderer>().enabled = true;
 
     }
+
+    public SpriteInfo GetCurrentSprite() { return sprites[currentSpriteIndex]; }
 }
