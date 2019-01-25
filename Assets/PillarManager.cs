@@ -3,20 +3,91 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+
 public class PillarManager : MonoBehaviour
 {
+    public GameStateManager gameStateManager;
     public Pillar[] m_pillars;
+
+    public int rollNum;
+
+    List<Pillar>[] pillarsOfRows;
 
     public float m_activationFrequency;
     private float m_activationTime;
 
+
     void Start()
     {
-        
+        GameObject[] pillarObjs = GameObject.FindGameObjectsWithTag("Pillar");
+        m_pillars = new Pillar[pillarObjs.Length];
+        for(int i = 0; i<pillarObjs.Length;i++)
+        {
+            m_pillars[i] = pillarObjs[i].GetComponent<Pillar>();
+        }
+
+        SortPillarsIntoRows();
+    }
+
+    void SortPillarsIntoRows()
+    {
+        int rowNum = GetRowNum();
+
+        pillarsOfRows = new List<Pillar>[rowNum];
+        for (int i = 0; i < rowNum; i++)
+        {
+            pillarsOfRows[i] = new List<Pillar>();
+        }
+        foreach (Pillar pillar in m_pillars)
+        {
+            for (int i = 0; i < rowNum; i++)
+            {
+                if ((int)pillar.pillarNumRow.y == i)
+                {
+                    pillarsOfRows[i].Add(pillar);
+                }
+            }
+        }
+
+        //for (int i = 0; i < rowNum; i++)
+        //{
+        //    Debug.Log("Row: " + i);
+        //    foreach (Pillar pillar in pillarsOfRows[i])
+        //    {
+        //        Debug.Log(pillar.gameObject.name);
+        //    }
+        //}
+    }
+
+    int GetRowNum()
+    {
+        List<int> seenRowNums = new List<int>();
+        seenRowNums.Add((int)m_pillars[0].pillarNumRow.y);
+
+        foreach (Pillar pillar in m_pillars)
+        {
+            bool hasSeen = false;
+            foreach (int seenRowNum in seenRowNums)
+            {
+                if ((int)pillar.pillarNumRow.y == seenRowNum)
+                {
+                    hasSeen = true;
+                    break;
+                }
+            }
+            if (!hasSeen) { seenRowNums.Add((int)pillar.pillarNumRow.y); }
+        }
+
+        return seenRowNums.Count();
     }
 
     void Update()
     {
+        if (gameStateManager.GetComponent<GameStateManager>().gameState == GameState.Clear)
+        {
+            return;
+
+        }
         m_activationTime += Time.deltaTime;
         if (m_activationTime >= m_activationFrequency)
         {
@@ -55,5 +126,25 @@ public class PillarManager : MonoBehaviour
         int m_random = Random.Range(0, m_intactPillars.Count);
 
         m_intactPillars[m_random].TriggerDestruction();
+    }
+
+    public void ReportPillarDestruction(int rowNum)
+    {
+        if (ArePillarsOfRowDestroyed(rowNum))
+        {
+            gameStateManager.ResetGame();
+        }
+    }
+
+    private bool ArePillarsOfRowDestroyed(int rowNum)
+    {
+        foreach(Pillar pillar in pillarsOfRows[rowNum])
+        {
+            if(pillar.m_state != PillarStates.Destroyed)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

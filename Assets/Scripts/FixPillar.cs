@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FixPillar : MonoBehaviour
 {
+
+    public delegate void ScoreHandler();
+    public static event ScoreHandler OnRepaired;
+
     public GameObject pillarManager;
     // Start is called before the first frame update
     void Start()
@@ -23,6 +27,10 @@ public class FixPillar : MonoBehaviour
                 if(pillar.pillarNumRow == GetComponent<MovementController>().GetCurrentSprite().PillarNumRoll)
                 {
                     pillar.Repair();
+                    if(OnRepaired != null)
+                    {
+                        OnRepaired();
+                    }
                 }
             }
         }

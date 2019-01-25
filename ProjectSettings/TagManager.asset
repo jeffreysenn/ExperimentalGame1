@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pillar
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 4082152371
+    locked: 0
+  - name: Ladder
+    uniqueID: 3506699041
+    locked: 0
+  - name: Pillar
+    uniqueID: 3864060413
     locked: 0
   - name: Player
     uniqueID: 549788265

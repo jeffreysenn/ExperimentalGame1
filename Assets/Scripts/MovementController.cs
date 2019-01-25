@@ -2,67 +2,120 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct SpriteInfo
-{
-    public GameObject Sprite;
-    public Vector2 NumAndRoll;
-    public bool IsActive;
-    public Vector2 PillarNumRoll;
-}
-
 public class MovementController : MonoBehaviour
 {
-    public SpriteInfo[] sprites;
-    private int currentSpriteIndex;
+    public ScoreManager scoreManager;
+    public Timer timer;
 
+    public GameObject[] playerObjs;
+    private CharacterInfo[] characterInfos;
+    private int currentSpriteIndex;
+    private bool shouldStartGame = false;
+
+    void SetCharacterInfos()
+    {
+        playerObjs = GameObject.FindGameObjectsWithTag("Player");
+        characterInfos = new CharacterInfo[playerObjs.Length];
+        for(int i = 0; i < playerObjs.Length; i++)
+        {
+            characterInfos[i] = playerObjs[i].GetComponent<CharacterInfo>();
+        }
+    }
+
+    void ResetGame()
+    {
+        for (int i = 0; i < characterInfos.Length; i++)
+        {
+            characterInfos[i].IsActive = false;
+            if(i == 0) { characterInfos[i].IsActive = true; }
+            if (characterInfos[i].IsActive) { currentSpriteIndex = i; }
+            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].IsActive;
+        }
+        scoreManager.ResetScore();
+        timer.ResetTimer();
+        shouldStartGame = true;
+    }
+
+    void ClearScreen()
+    {
+        for (int i = 0; i < characterInfos.Length; i++)
+        {
+            characterInfos[i].IsActive = false;
+            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].IsActive;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < sprites.Length; i++)
-        {
-            if (sprites[i].IsActive) { currentSpriteIndex = i; }
-            sprites[i].Sprite.GetComponent<Renderer>().enabled = sprites[i].IsActive;
-        }
+        SetCharacterInfos();
+        ClearScreen();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Right"))
+        if (Input.GetButtonDown("Start"))
         {
-            Vector2 NextNumAndRoll = sprites[currentSpriteIndex].NumAndRoll + new Vector2(1, 0);
-            ShowNextSprite(NextNumAndRoll);
+            ResetGame();
         }
 
-        if (Input.GetButtonDown("Left"))
+        if (shouldStartGame)
         {
-            Vector2 NextNumAndRoll = sprites[currentSpriteIndex].NumAndRoll + new Vector2(-1, 0);
-            ShowNextSprite(NextNumAndRoll);
-        }
+            if (Input.GetButtonDown("Right"))
+            {
+                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].NumAndRoll + new Vector2(1, 0);
+                ShowNextSprite(NextNumAndRoll);
+            }
 
-        if (Input.GetButtonDown("Up"))
-        {
-            Vector2 NextNumAndRoll = sprites[currentSpriteIndex].NumAndRoll + new Vector2(0, 1);
-            ShowNextSprite(NextNumAndRoll);
-        }
+            if (Input.GetButtonDown("Left"))
+            {
+                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].NumAndRoll + new Vector2(-1, 0);
+                ShowNextSprite(NextNumAndRoll);
+            }
 
-        if (Input.GetButtonDown("Down"))
-        {
-            Vector2 NextNumAndRoll = sprites[currentSpriteIndex].NumAndRoll + new Vector2(0, -1);
-            ShowNextSprite(NextNumAndRoll);
+            if (Input.GetButtonDown("Up"))
+            {
+                if (LadderCheckAbove())
+                {
+                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].LadderAbove.GetComponent<CharacterInfo>().NumAndRoll;
+                    ShowNextSprite(NextNumAndRoll);
+
+                }
+            }
+
+            if (Input.GetButtonDown("Down"))
+            {
+                if (LadderCheckBelow())
+                {
+                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].LadderBelow.GetComponent<CharacterInfo>().NumAndRoll;
+                    ShowNextSprite(NextNumAndRoll);
+
+                }
+            }
         }
 
     }
 
+    private bool LadderCheckAbove()
+    {
+        if (characterInfos[currentSpriteIndex].LadderAbove == null) { return false; }
+        return true;
+    }
+
+    private bool LadderCheckBelow()
+    {
+        if (characterInfos[currentSpriteIndex].LadderBelow == null) { return false; }
+        return true;
+    }
+
     private void ShowNextSprite(Vector2 NextNumAndRoll)
     {
-        for (int i = 0; i < sprites.Length; i++)
+        for (int i = 0; i < characterInfos.Length; i++)
         {
-            if (sprites[i].NumAndRoll == NextNumAndRoll)
+            if (characterInfos[i].NumAndRoll == NextNumAndRoll)
             {
-                sprites[currentSpriteIndex].IsActive = false;
-                sprites[i].IsActive = true;
+                characterInfos[currentSpriteIndex].IsActive = false;
+                characterInfos[i].IsActive = true;
                 UpdateVisibility(i);
                 currentSpriteIndex = i;
                 break;
@@ -72,10 +125,10 @@ public class MovementController : MonoBehaviour
 
     void UpdateVisibility(int newVisibleNum)
     {
-        sprites[currentSpriteIndex].Sprite.GetComponent<Renderer>().enabled = false;
-        sprites[newVisibleNum].Sprite.GetComponent<Renderer>().enabled = true;
+        characterInfos[currentSpriteIndex].GetComponent<Renderer>().enabled = false;
+        characterInfos[newVisibleNum].GetComponent<Renderer>().enabled = true;
 
     }
 
-    public SpriteInfo GetCurrentSprite() { return sprites[currentSpriteIndex]; }
+    public CharacterInfo GetCurrentSprite() { return characterInfos[currentSpriteIndex]; }
 }

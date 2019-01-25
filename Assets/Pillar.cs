@@ -24,6 +24,8 @@ public class Pillar : MonoBehaviour
 
     public Vector2 pillarNumRow;
 
+    public PillarManager pillarManager;
+
     private float m_destructDuration = 2f;
     private float m_destructTime;
 
@@ -55,6 +57,11 @@ public class Pillar : MonoBehaviour
                 1 - ((float)m_state/((float)PillarStates.Count-1)));
         */
         //Debug.Log(((1/5)));
+
+        if(m_state == PillarStates.Destroyed)
+        {
+            pillarManager.ReportPillarDestruction((int)pillarNumRow.y);
+        }
     }
 
     public void TriggerDestruction()
