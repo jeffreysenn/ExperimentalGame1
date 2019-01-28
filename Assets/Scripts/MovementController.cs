@@ -24,12 +24,21 @@ public class MovementController : MonoBehaviour
 
     void ResetGame()
     {
+        bool hasActive = false;
         for (int i = 0; i < characterInfos.Length; i++)
         {
-            characterInfos[i].isActive = false;
-            if(i == 0) { characterInfos[i].isActive = true; }
-            if (characterInfos[i].isActive) { currentSpriteIndex = i; }
+            //characterInfos[i].isActive = false;
+            //if(i == 0) { characterInfos[i].isActive = true; }
+            if (characterInfos[i].isActive) { currentSpriteIndex = i; hasActive = true; }
             characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].isActive;
+        }
+        if (!hasActive)
+        {
+            for (int i = 0; i < characterInfos.Length; i++)
+            {
+                if (i == 0) { characterInfos[i].isActive = true; }
+                characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].isActive;
+            }
         }
         scoreManager.ResetScore();
         timer.ResetTimer();
@@ -40,8 +49,7 @@ public class MovementController : MonoBehaviour
     {
         for (int i = 0; i < characterInfos.Length; i++)
         {
-            characterInfos[i].isActive = false;
-            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].isActive;
+            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = false;
         }
     }
     // Start is called before the first frame update

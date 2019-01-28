@@ -2650,7 +2650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &747446343
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2807,6 +2807,12 @@ PrefabInstance:
       propertyPath: numAndRoll.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3428328579352498201, guid: a2a8cb776e5e0ba4189f314f00960065,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06dfbb78c20ddff4fa8cf02886daad8b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2a8cb776e5e0ba4189f314f00960065, type: 3}
 --- !u!4 &752935756 stripped
@@ -5716,6 +5722,12 @@ PrefabInstance:
       propertyPath: numAndRoll.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3428328579352498201, guid: a2a8cb776e5e0ba4189f314f00960065,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 48e536ad7b7a16f48b9da1685178acdc,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2a8cb776e5e0ba4189f314f00960065, type: 3}
 --- !u!4 &1639638068 stripped
@@ -6997,6 +7009,11 @@ PrefabInstance:
     - target: {fileID: 3428328579352498215, guid: a2a8cb776e5e0ba4189f314f00960065,
         type: 3}
       propertyPath: numAndRoll.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428328579352498215, guid: a2a8cb776e5e0ba4189f314f00960065,
+        type: 3}
+      propertyPath: isActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
