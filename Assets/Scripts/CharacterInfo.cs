@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterInfo : MonoBehaviour
 {
-    public Vector2 NumAndRoll;
-    public bool IsActive;
-    public Vector2 PillarNumRoll;
-    public GameObject LadderAbove, LadderBelow;
+    public Vector2 numAndRoll;
+    public bool isActive;
+    public Pillar pillar;
+    public GameObject ladderAbove, ladderBelow;
 }

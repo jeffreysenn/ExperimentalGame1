@@ -26,10 +26,10 @@ public class MovementController : MonoBehaviour
     {
         for (int i = 0; i < characterInfos.Length; i++)
         {
-            characterInfos[i].IsActive = false;
-            if(i == 0) { characterInfos[i].IsActive = true; }
-            if (characterInfos[i].IsActive) { currentSpriteIndex = i; }
-            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].IsActive;
+            characterInfos[i].isActive = false;
+            if(i == 0) { characterInfos[i].isActive = true; }
+            if (characterInfos[i].isActive) { currentSpriteIndex = i; }
+            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].isActive;
         }
         scoreManager.ResetScore();
         timer.ResetTimer();
@@ -40,8 +40,8 @@ public class MovementController : MonoBehaviour
     {
         for (int i = 0; i < characterInfos.Length; i++)
         {
-            characterInfos[i].IsActive = false;
-            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].IsActive;
+            characterInfos[i].isActive = false;
+            characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].isActive;
         }
     }
     // Start is called before the first frame update
@@ -63,13 +63,13 @@ public class MovementController : MonoBehaviour
         {
             if (Input.GetButtonDown("Right"))
             {
-                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].NumAndRoll + new Vector2(1, 0);
+                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].numAndRoll + new Vector2(1, 0);
                 ShowNextSprite(NextNumAndRoll);
             }
 
             if (Input.GetButtonDown("Left"))
             {
-                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].NumAndRoll + new Vector2(-1, 0);
+                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].numAndRoll + new Vector2(-1, 0);
                 ShowNextSprite(NextNumAndRoll);
             }
 
@@ -77,7 +77,7 @@ public class MovementController : MonoBehaviour
             {
                 if (LadderCheckAbove())
                 {
-                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].LadderAbove.GetComponent<CharacterInfo>().NumAndRoll;
+                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].ladderAbove.GetComponent<CharacterInfo>().numAndRoll;
                     ShowNextSprite(NextNumAndRoll);
 
                 }
@@ -87,7 +87,7 @@ public class MovementController : MonoBehaviour
             {
                 if (LadderCheckBelow())
                 {
-                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].LadderBelow.GetComponent<CharacterInfo>().NumAndRoll;
+                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].ladderBelow.GetComponent<CharacterInfo>().numAndRoll;
                     ShowNextSprite(NextNumAndRoll);
 
                 }
@@ -98,13 +98,13 @@ public class MovementController : MonoBehaviour
 
     private bool LadderCheckAbove()
     {
-        if (characterInfos[currentSpriteIndex].LadderAbove == null) { return false; }
+        if (characterInfos[currentSpriteIndex].ladderAbove == null) { return false; }
         return true;
     }
 
     private bool LadderCheckBelow()
     {
-        if (characterInfos[currentSpriteIndex].LadderBelow == null) { return false; }
+        if (characterInfos[currentSpriteIndex].ladderBelow == null) { return false; }
         return true;
     }
 
@@ -112,10 +112,10 @@ public class MovementController : MonoBehaviour
     {
         for (int i = 0; i < characterInfos.Length; i++)
         {
-            if (characterInfos[i].NumAndRoll == NextNumAndRoll)
+            if (characterInfos[i].numAndRoll == NextNumAndRoll)
             {
-                characterInfos[currentSpriteIndex].IsActive = false;
-                characterInfos[i].IsActive = true;
+                characterInfos[currentSpriteIndex].isActive = false;
+                characterInfos[i].isActive = true;
                 UpdateVisibility(i);
                 currentSpriteIndex = i;
                 break;

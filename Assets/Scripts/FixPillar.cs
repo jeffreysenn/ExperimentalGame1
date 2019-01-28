@@ -8,30 +8,23 @@ public class FixPillar : MonoBehaviour
     public delegate void ScoreHandler();
     public static event ScoreHandler OnRepaired;
 
-    public GameObject pillarManager;
+    private Pillar pillar;
     // Start is called before the first frame update
     void Start()
     {
-        
+        pillar = GetComponent<CharacterInfo>().pillar;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(pillarManager == null) { return; }
+        if (!pillar) { return; }
         if (Input.GetButtonDown("Action1"))
         {
-            Pillar[] allPillars = pillarManager.GetComponent<PillarManager>().m_pillars;
-            foreach(Pillar pillar in allPillars)
+            pillar.Repair();
+            if (OnRepaired != null)
             {
-                if(pillar.pillarNumRow == GetComponent<MovementController>().GetCurrentSprite().PillarNumRoll)
-                {
-                    pillar.Repair();
-                    if(OnRepaired != null)
-                    {
-                        OnRepaired();
-                    }
-                }
+                OnRepaired();
             }
         }
     }
