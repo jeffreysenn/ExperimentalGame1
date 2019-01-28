@@ -23,6 +23,7 @@ public class ScoreManager : MonoBehaviour
     
     void AddScore()
     {
+        if(GameStateManager.gameState != GameState.Clear)
         score++;
         UIManager.UpdateScore(score);
     }

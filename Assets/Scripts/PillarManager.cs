@@ -81,7 +81,7 @@ public class PillarManager : MonoBehaviour
 
     void Update()
     {
-        if (gameStateManager.GetComponent<GameStateManager>().gameState == GameState.Clear)
+        if (GameStateManager.gameState == GameState.Clear)
         {
             return;
 

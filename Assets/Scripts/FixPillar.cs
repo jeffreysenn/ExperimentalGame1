@@ -17,6 +17,7 @@ public class FixPillar : MonoBehaviour
         {
             pillar = GetComponent<MovementController>().GetCurrentSprite().pillar;
             if (!pillar) { return; }
+            if(pillar.m_state == PillarStates.Intact) { return; }
             pillar.Repair();
             if (OnRepaired != null)
             {

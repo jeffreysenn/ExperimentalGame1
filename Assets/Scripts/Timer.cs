@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if(gameStateManagerObj.GetComponent<GameStateManager>().gameState != GameState.Playing) { return; }
+        if(GameStateManager.gameState != GameState.Playing) { return; }
         timer += Time.deltaTime;
         intTime = Mathf.FloorToInt(timer);
         if(intTime != preIntTime)

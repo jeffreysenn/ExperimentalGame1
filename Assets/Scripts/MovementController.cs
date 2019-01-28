@@ -54,7 +54,7 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Start"))
+        if (Input.GetButtonDown("Start") && GameStateManager.gameState != GameState.Playing)
         {
             ResetGame();
         }

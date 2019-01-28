@@ -5,7 +5,7 @@ using UnityEngine;
 public class SetPillarRow : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         if (GetComponent<CharacterInfo>().pillar)
         {
