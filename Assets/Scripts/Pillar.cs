@@ -22,7 +22,7 @@ public class Pillar : MonoBehaviour
 
     public bool IsDestructing { get { return (m_state > 0); } }
 
-    public Vector2 pillarNumRow;
+    public int row;
 
     public PillarManager pillarManager;
 
@@ -60,7 +60,7 @@ public class Pillar : MonoBehaviour
 
         if(m_state == PillarStates.Destroyed)
         {
-            pillarManager.ReportPillarDestruction((int)pillarNumRow.y);
+            pillarManager.ReportPillarDestruction(row);
         }
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3428328579352498214}
   - component: {fileID: 3428328579352498201}
   - component: {fileID: 3428328579352498215}
+  - component: {fileID: 2148977820297633581}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Player
@@ -97,3 +98,15 @@ MonoBehaviour:
   pillar: {fileID: 0}
   ladderAbove: {fileID: 0}
   ladderBelow: {fileID: 0}
+--- !u!114 &2148977820297633581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3428328579352498200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0a265b7a12d7c2498d5c6473822051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

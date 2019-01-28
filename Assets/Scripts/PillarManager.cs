@@ -9,8 +9,6 @@ public class PillarManager : MonoBehaviour
     public GameStateManager gameStateManager;
     public Pillar[] m_pillars;
 
-    public int rollNum;
-
     List<Pillar>[] pillarsOfRows;
 
     public float m_activationFrequency;
@@ -42,7 +40,7 @@ public class PillarManager : MonoBehaviour
         {
             for (int i = 0; i < rowNum; i++)
             {
-                if ((int)pillar.pillarNumRow.y == i)
+                if ((int)pillar.row == i)
                 {
                     pillarsOfRows[i].Add(pillar);
                 }
@@ -62,20 +60,20 @@ public class PillarManager : MonoBehaviour
     int GetRowNum()
     {
         List<int> seenRowNums = new List<int>();
-        seenRowNums.Add((int)m_pillars[0].pillarNumRow.y);
+        seenRowNums.Add((int)m_pillars[0].row);
 
         foreach (Pillar pillar in m_pillars)
         {
             bool hasSeen = false;
             foreach (int seenRowNum in seenRowNums)
             {
-                if ((int)pillar.pillarNumRow.y == seenRowNum)
+                if ((int)pillar.row == seenRowNum)
                 {
                     hasSeen = true;
                     break;
                 }
             }
-            if (!hasSeen) { seenRowNums.Add((int)pillar.pillarNumRow.y); }
+            if (!hasSeen) { seenRowNums.Add((int)pillar.row); }
         }
 
         return seenRowNums.Count();
