@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: -430906883
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c3fbb94f0327d3b41af037ff2779b258, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34885128b0c9d8a45a04ed8bb0335a3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,9 +95,9 @@ MonoBehaviour:
   m_state: 0
   m_spriteRenderer: {fileID: 0}
   m_sprites:
-  - {fileID: 21300000, guid: c3fbb94f0327d3b41af037ff2779b258, type: 3}
-  - {fileID: 21300000, guid: 3e6e9b94c86235d41b53f53b80e00a0c, type: 3}
-  - {fileID: 21300000, guid: 5c5b380919732004d8ce373491214d01, type: 3}
-  - {fileID: 21300000, guid: 3589235788b60134b9e57eff2e8c638d, type: 3}
-  pillarNumRow: {x: 0, y: 0}
+  - {fileID: 21300000, guid: 34885128b0c9d8a45a04ed8bb0335a3f, type: 3}
+  - {fileID: 21300000, guid: 46ed6bb614ea7ab499d5a640c0b72369, type: 3}
+  - {fileID: 21300000, guid: d80941b89baf08b4cb3f1d60a4d501d2, type: 3}
+  - {fileID: 21300000, guid: 54c95cbc2cbfc4d42b6aab977054707f, type: 3}
+  row: 0
   pillarManager: {fileID: 0}
