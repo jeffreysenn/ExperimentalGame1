@@ -67,7 +67,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 549788265
-  m_SortingLayer: 1
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3cf3e378e7caaba49b3c8e1c9cb55c73, type: 3}
   m_Color: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7915a191b6d35d469704abdd71ecfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumAndRoll: {x: 0, y: 0}
-  IsActive: 1
-  PillarNumRoll: {x: 0, y: 0}
-  LadderAbove: {fileID: 0}
-  LadderBelow: {fileID: 0}
+  numAndRoll: {x: 0, y: 0}
+  isActive: 0
+  pillar: {fileID: 0}
+  ladderAbove: {fileID: 0}
+  ladderBelow: {fileID: 0}
