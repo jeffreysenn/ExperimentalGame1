@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -576,16 +576,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayerID
-      value: -430906883
+      propertyPath: pillarNumRow.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
+      propertyPath: pillarNumRow.x
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -641,21 +646,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.y
-      value: 0
+      propertyPath: m_SortingLayerID
+      value: -430906883
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.x
-      value: 2
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!4 &216136274 stripped
@@ -903,6 +903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 339985340}
   - component: {fileID: 339985339}
+  - component: {fileID: 339985341}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -939,6 +940,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339985341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339985338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c37b3c517b261419224b6dba6ab80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &347028485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1125,6 +1138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1180,11 +1198,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!4 &412892843 stripped
@@ -1280,6 +1293,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1335,11 +1353,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!1001 &427969557
@@ -1354,16 +1367,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayerID
-      value: -430906883
+      propertyPath: pillarNumRow.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
+      propertyPath: pillarNumRow.x
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1419,21 +1437,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.y
-      value: 0
+      propertyPath: m_SortingLayerID
+      value: -430906883
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.x
-      value: 1
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!1001 &459322796
@@ -3090,16 +3103,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayerID
-      value: -430906883
+      propertyPath: pillarNumRow.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
+      propertyPath: pillarNumRow.x
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3155,21 +3173,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.y
-      value: 0
+      propertyPath: m_SortingLayerID
+      value: -430906883
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.x
-      value: 2
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!1001 &973915369
@@ -3334,6 +3347,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3389,11 +3407,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!1001 &1011473637
@@ -3684,16 +3697,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayerID
-      value: -430906883
+      propertyPath: pillarNumRow.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
+      propertyPath: pillarNumRow.x
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3749,21 +3767,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.y
-      value: 0
+      propertyPath: m_SortingLayerID
+      value: -430906883
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.x
-      value: 2
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!1001 &1073316402
@@ -4894,16 +4907,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayerID
-      value: -430906883
+      propertyPath: pillarNumRow.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
+      propertyPath: pillarNumRow.x
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4959,21 +4977,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.y
-      value: 0
+      propertyPath: m_SortingLayerID
+      value: -430906883
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.x
-      value: 1
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!1001 &1460025668
@@ -6562,16 +6575,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pillar (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayerID
-      value: -430906883
+      propertyPath: pillarNumRow.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
+      propertyPath: pillarNumRow.x
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+        type: 3}
+      propertyPath: pillarManager
+      value: 
+      objectReference: {fileID: 67859796}
     - target: {fileID: 6148872817020104681, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6627,21 +6645,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.y
-      value: 0
+      propertyPath: m_SortingLayerID
+      value: -430906883
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
+    - target: {fileID: 5351942397045274532, guid: b5e736f71f6ae4f48b2239f55f078465,
         type: 3}
-      propertyPath: pillarNumRow.x
-      value: 1
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7380431169217548936, guid: b5e736f71f6ae4f48b2239f55f078465,
-        type: 3}
-      propertyPath: pillarManager
-      value: 
-      objectReference: {fileID: 67859796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5e736f71f6ae4f48b2239f55f078465, type: 3}
 --- !u!1001 &2015692616

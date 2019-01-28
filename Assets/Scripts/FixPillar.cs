@@ -12,15 +12,16 @@ public class FixPillar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pillar = GetComponent<CharacterInfo>().pillar;
+        pillar = GetComponent<MovementController>().GetCurrentSprite().pillar;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!pillar) { return; }
         if (Input.GetButtonDown("Action1"))
         {
+            pillar = GetComponent<MovementController>().GetCurrentSprite().pillar;
+            if (!pillar) { return; }
             pillar.Repair();
             if (OnRepaired != null)
             {
