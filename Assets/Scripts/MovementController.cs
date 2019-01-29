@@ -40,8 +40,8 @@ public class MovementController : MonoBehaviour
                 characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].isActive;
             }
         }
-        scoreManager.ResetScore();
-        timer.ResetTimer();
+        //scoreManager.ResetScore();
+        //timer.ResetTimer();
         shouldStartGame = true;
     }
 
@@ -62,7 +62,7 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Start") && GameStateManager.gameState != GameState.Playing)
+        if (Input.GetButtonDown("Start") && !shouldStartGame)
         {
             ResetGame();
         }
