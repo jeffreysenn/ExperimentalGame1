@@ -72,6 +72,7 @@ public class MovementController : MonoBehaviour
 
         if (shouldStartGame)
         {
+
             if (Input.GetButtonDown("Right"))
             {
                 Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].numAndRoll + new Vector2(1, 0);
@@ -100,7 +101,6 @@ public class MovementController : MonoBehaviour
                 {
                     Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].ladderBelow.GetComponent<CharacterInfo>().numAndRoll;
                     ShowNextSprite(NextNumAndRoll);
-
                 }
             }
         }
