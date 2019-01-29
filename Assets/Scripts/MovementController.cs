@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    public delegate void MovementHandler();
+    public static event MovementHandler OnMoved;
+
     public ScoreManager scoreManager;
     public Timer timer;
 
@@ -126,6 +129,10 @@ public class MovementController : MonoBehaviour
                 characterInfos[i].isActive = true;
                 UpdateVisibility(i);
                 currentSpriteIndex = i;
+                if (OnMoved!=null)
+                {
+                    OnMoved();
+                }
                 break;
             }
         }
