@@ -5,7 +5,7 @@ using UnityEngine;
 public class FixPillar : MonoBehaviour
 {
 
-    public delegate void ScoreHandler();
+    public delegate void ScoreHandler(Pillar pillar);
     public static event ScoreHandler OnRepaired;
 
     private Pillar pillar;
@@ -24,12 +24,13 @@ public class FixPillar : MonoBehaviour
         {
             pillar = GetComponent<MovementController>().GetCurrentSprite().pillar;
             if (!pillar) { return; }
-            if(pillar.m_state == PillarStates.Intact) { return; }
+            if(pillar.m_state == PillarStates.Intact || pillar.m_state == PillarStates.Destroyed) { return; }
             pillar.SetPillarFrozen(true);
             shouldStartTimer = true;
+            pillar.m_state = PillarStates.Intact;
             if (OnRepaired != null)
             {
-                OnRepaired();
+                OnRepaired(pillar);
             }
             GetComponent<MovementController>().isFrozen = true;
         }

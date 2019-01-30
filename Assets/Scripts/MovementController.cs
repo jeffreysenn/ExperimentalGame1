@@ -38,6 +38,7 @@ public class MovementController : MonoBehaviour
             //if(i == 0) { characterInfos[i].isActive = true; }
             if (characterInfos[i].isActive) { currentSpriteIndex = i; hasActive = true; }
             characterInfos[i].gameObject.GetComponent<Renderer>().enabled = characterInfos[i].isActive;
+            SetLadder(i);
         }
         if (!hasActive)
         {
@@ -66,6 +67,13 @@ public class MovementController : MonoBehaviour
         ClearScreen();
     }
 
+    void SetLadder(int characterIndex)
+    {
+        if (characterInfos[characterIndex].ladderAbove)
+        {
+            characterInfos[characterIndex].ladderAbove.ladderBelow = characterInfos[characterIndex];
+        }
+    }
     // Update is called once per frame
     void Update()
     {

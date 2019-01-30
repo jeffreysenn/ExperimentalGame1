@@ -14,6 +14,7 @@ public enum PillarStates
 
 public class Pillar : MonoBehaviour
 {
+    public int point = 1;
     [HideInInspector]
     public PillarStates m_state;
 
@@ -26,7 +27,7 @@ public class Pillar : MonoBehaviour
 
     public PillarManager pillarManager;
 
-    private float m_destructDuration = 2f;
+    private float m_destructDuration = 2.5f;
     private float m_destructTime;
 
     public AudioSource[] m_audioSources;
@@ -72,11 +73,6 @@ public class Pillar : MonoBehaviour
                 1 - ((float)m_state/((float)PillarStates.Count-1)));
         */
         //Debug.Log(((1/5)));
-
-        if(m_state == PillarStates.Destroyed)
-        {
-            pillarManager.ReportPillarDestruction(row);
-        }
     }
 
     public void TriggerDestruction()
@@ -93,7 +89,12 @@ public class Pillar : MonoBehaviour
         else
         {
             m_spriteRenderer.color = Color.clear;
-            OnDestroyed();
+            if(OnDestroyed != null)
+            {
+                OnDestroyed();
+            }
+            pillarManager.ReportPillarDestruction(row);
+            PillarManager.pillarsDestroyed++;
         }
 
         if (m_audioSources.Length > (int)m_state - 1 && m_audioSources[(int)m_state - 1] != null)

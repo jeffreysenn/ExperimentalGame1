@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySFX(int i)
     {
+        if(i > m_audioSources.Length) { return; }
         if (m_audioSources[i] != null)
         {
             if (i == 3 && m_audioSources[3] != null)
@@ -37,7 +38,7 @@ public class SoundManager : MonoBehaviour
         PlaySFX(i);
     }
 
-    void PlayRepairSFX()
+    void PlayRepairSFX(Pillar pillar)
     {
         PlaySFX(1);
     }

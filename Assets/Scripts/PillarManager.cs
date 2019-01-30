@@ -3,21 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
+public struct TimeAndDifficulty
+{
+    public Vector2 timeSlot;
+    public Vector2 activationPeriod;
+}
 
 public class PillarManager : MonoBehaviour
 {
+    public TimeAndDifficulty[] timeAndDifficulties;
+    private int tdIndex;
+
+    public static int pillarsDestroyed = 0;
+
     public GameStateManager gameStateManager;
     public Pillar[] m_pillars;
 
     public List<Pillar>[] pillarsOfRows;
 
-    public float m_activationFrequency;
+    public float m_activationPeriod;
     private float m_activationTime;
 
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
 
     public bool m_gameOver = false;
+
+    private void OnEnable()
+    {
+        ScoreManager.OnAddedLife += RepairAllDestroyedPillars;
+    }
+
+    private void OnDisable()
+    {
+        ScoreManager.OnAddedLife -= RepairAllDestroyedPillars;
+
+    }
 
     void Start()
     {
@@ -29,6 +51,7 @@ public class PillarManager : MonoBehaviour
         }
 
         SortPillarsIntoRows();
+        tdIndex = 0;
     }
 
     void SortPillarsIntoRows()
@@ -88,10 +111,24 @@ public class PillarManager : MonoBehaviour
         if (GameStateManager.gameState == GameState.Clear)
         {
             return;
-
         }
+
+
+        if(tdIndex < timeAndDifficulties.Length)
+        {
+            if ((Timer.timer - timeAndDifficulties[tdIndex].timeSlot.x) * (Timer.timer - timeAndDifficulties[tdIndex].timeSlot.y) < 0)
+            {
+                m_activationPeriod = Mathf.Lerp(timeAndDifficulties[tdIndex].activationPeriod.x, timeAndDifficulties[tdIndex].activationPeriod.y, (Timer.timer - timeAndDifficulties[tdIndex].timeSlot.x)/ (timeAndDifficulties[tdIndex].timeSlot.y - timeAndDifficulties[tdIndex].timeSlot.x));
+            }
+            else if(Time.time > timeAndDifficulties[tdIndex].timeSlot.y)
+            {
+                tdIndex++;
+            }
+        }
+        
+
         m_activationTime += Time.deltaTime;
-        if (m_activationTime >= m_activationFrequency)
+        if (m_activationTime >= m_activationPeriod)
         {
             m_activationTime = 0;
             CrackRandomPillar();
@@ -100,6 +137,18 @@ public class PillarManager : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Space))
           //  RepairAllPillars();
 
+    }
+
+    public void RepairAllDestroyedPillars()
+    {
+        foreach (Pillar m_pillar in m_pillars)
+        {
+            if (m_pillar.m_state == PillarStates.Destroyed)
+            {
+                m_pillar.Repair();
+
+            }
+        }
     }
 
     void RepairAllPillars()

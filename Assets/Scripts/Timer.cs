@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour
 {
     public GameObject UIManagerObj;
     public GameObject gameStateManagerObj;
-    float timer = 0;
+    public static float timer = 0;
     int preIntTime = 0;
     int intTime = 0;
 

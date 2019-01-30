@@ -7,5 +7,5 @@ public class CharacterInfo : MonoBehaviour
     public Vector2 numAndRoll;
     public bool isActive;
     public Pillar pillar;
-    public GameObject ladderAbove, ladderBelow;
+    public CharacterInfo ladderAbove, ladderBelow;
 }

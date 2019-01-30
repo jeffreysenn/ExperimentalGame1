@@ -14,7 +14,19 @@ public class GameStateManager : MonoBehaviour
 {
     public AudioSource m_music;
     public static GameState gameState = GameState.Clear;
+
+    [SerializeField] int losingDestroyedPillar = 3;
     // Start is called before the first frame update
+
+    private void IncreasePillarDestroyed()
+    {
+        if(PillarManager.pillarsDestroyed >= losingDestroyedPillar)
+        {
+            StartCoroutine(ResetGame());
+        }
+    }
+
+
     void Start()
     {
         gameState = GameState.Clear;
@@ -36,10 +48,11 @@ public class GameStateManager : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
-        m_music.Stop();
-        yield return StartCoroutine(DelayExecution());
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+        if (!m_music) { yield return null; }
+        m_music.Stop();
+        yield return StartCoroutine(DelayExecution());
     }
 
     IEnumerator DelayExecution()
@@ -50,7 +63,11 @@ public class GameStateManager : MonoBehaviour
     public void StartGame()
     {
         gameState = GameState.Playing;
+        if (m_music)
+        {
         m_music.Play();
+
+        }
     }
 
     

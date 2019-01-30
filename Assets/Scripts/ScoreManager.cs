@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    public delegate void ScoreHandler();
+    public static event ScoreHandler OnAddedLife;
     public GameObject UIManagerObj;
     private int score = 0;
     private UIManager UIManager;
+    [SerializeField] int addLifeScore = 10;
+    private int lastScoreWhenAddedLife = 0;
 
     void OnEnable()
     {
@@ -21,11 +25,19 @@ public class ScoreManager : MonoBehaviour
         FixPillar.OnRepaired -= AddScore;
     }
     
-    void AddScore()
+    void AddScore(Pillar pillar)
     {
         if(GameStateManager.gameState != GameState.Clear)
-        score++;
+        score+= pillar.point;
         UIManager.UpdateScore(score);
+        if(score - lastScoreWhenAddedLife >= addLifeScore) { AddLife(); }
+    }
+
+    public void AddLife()
+    {
+        if(OnAddedLife != null) { OnAddedLife(); }
+        PillarManager.pillarsDestroyed = 0;
+        lastScoreWhenAddedLife += addLifeScore;
     }
 
     public void ResetScore()
