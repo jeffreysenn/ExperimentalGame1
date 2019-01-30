@@ -14,6 +14,8 @@ public class PillarManager : MonoBehaviour
     public float m_activationFrequency;
     private float m_activationTime;
 
+    public delegate void GameOverHandler();
+    public static event GameOverHandler OnGameOver;
 
     void Start()
     {
@@ -93,8 +95,8 @@ public class PillarManager : MonoBehaviour
             CrackRandomPillar();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            RepairAllPillars();
+        //if (Input.GetKeyDown(KeyCode.Space))
+          //  RepairAllPillars();
 
     }
 
@@ -130,6 +132,7 @@ public class PillarManager : MonoBehaviour
     {
         if (ArePillarsOfRowDestroyed(rowNum))
         {
+            OnGameOver();
             gameStateManager.ResetGame();
         }
     }

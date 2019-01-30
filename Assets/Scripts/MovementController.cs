@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public delegate void MovementHandler();
+    public delegate void MovementHandler(int i);
     public static event MovementHandler OnMoved;
 
     public ScoreManager scoreManager;
@@ -131,7 +131,7 @@ public class MovementController : MonoBehaviour
                 currentSpriteIndex = i;
                 if (OnMoved!=null)
                 {
-                    OnMoved();
+                    OnMoved(0);
                 }
                 break;
             }
