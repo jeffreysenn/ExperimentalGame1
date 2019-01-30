@@ -68,6 +68,9 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (pillarManager.m_gameOver)
+            return;
+
         if (Input.GetButtonDown("Start") && !shouldStartGame)
         {
             ResetGame();

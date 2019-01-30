@@ -31,6 +31,10 @@ public class Pillar : MonoBehaviour
 
     public AudioSource[] m_audioSources;
 
+    public delegate void PillarHandler();
+    public static event PillarHandler OnDestroyed;
+    public static event PillarHandler OnRebuilt;
+
     void OnEnable()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
@@ -78,7 +82,10 @@ public class Pillar : MonoBehaviour
         if (m_state != PillarStates.Destroyed)
             m_spriteRenderer.sprite = m_sprites[(int)m_state];
         else
+        {
             m_spriteRenderer.color = Color.clear;
+            OnDestroyed();
+        }
 
         if (m_audioSources.Length > (int)m_state - 1 && m_audioSources[(int)m_state - 1] != null)
             m_audioSources[(int)m_state - 1].Play();
@@ -86,6 +93,8 @@ public class Pillar : MonoBehaviour
 
     public void Repair()
     {
+        if (m_state == PillarStates.Destroyed)
+            OnRebuilt();
         m_state = PillarStates.Intact;
         m_spriteRenderer.sprite = m_sprites[0];
         m_spriteRenderer.color = Color.white;

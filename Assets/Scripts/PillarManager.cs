@@ -17,6 +17,8 @@ public class PillarManager : MonoBehaviour
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
 
+    public bool m_gameOver = false;
+
     void Start()
     {
         GameObject[] pillarObjs = GameObject.FindGameObjectsWithTag("Pillar");
@@ -133,8 +135,16 @@ public class PillarManager : MonoBehaviour
         if (ArePillarsOfRowDestroyed(rowNum))
         {
             OnGameOver();
-            gameStateManager.ResetGame();
+            m_gameOver = true;
+            EnablePillars(false);
+            StartCoroutine(gameStateManager.ResetGame());
         }
+    }
+
+    private void EnablePillars(bool p_value)
+    {
+        foreach (Pillar m_pillar in m_pillars)
+            m_pillar.enabled = p_value;
     }
 
     private bool ArePillarsOfRowDestroyed(int rowNum)

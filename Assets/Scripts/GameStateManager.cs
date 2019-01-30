@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
     Playing,
-    Clear
+    Clear,
+    Failed
 }
 
 public class GameStateManager : MonoBehaviour
@@ -32,10 +33,16 @@ public class GameStateManager : MonoBehaviour
 
     }
 
-    public void ResetGame()
+    public IEnumerator ResetGame()
     {
+        yield return StartCoroutine(DelayExecution());
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    IEnumerator DelayExecution()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     public void StartGame()

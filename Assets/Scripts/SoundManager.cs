@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour
         MovementController.OnMoved += PlayMovementSFX;
         FixPillar.OnRepaired += PlayRepairSFX;
         PillarManager.OnGameOver += PlayLoosingSFX;
+        Pillar.OnDestroyed += PlayCrackedSFX;
+        Pillar.OnRebuilt += PlayRebuiltSFX;
     }
 
     private void OnDisable()
@@ -18,13 +20,14 @@ public class SoundManager : MonoBehaviour
         MovementController.OnMoved -= PlayMovementSFX;
         FixPillar.OnRepaired -= PlayRepairSFX;
         PillarManager.OnGameOver -= PlayLoosingSFX;
+        Pillar.OnRebuilt -= PlayRebuiltSFX;
     }
-    
+
     private void PlaySFX(int i)
     {
         if (m_audioSources[i] != null)
         {
-            if (i == 2 && m_audioSources[2] != null)
+            if (i == 3 && m_audioSources[3] != null)
                 Debug.Log("HENLO");
             m_audioSources[i].Play();
         }
@@ -46,10 +49,10 @@ public class SoundManager : MonoBehaviour
 
     void PlayCrackedSFX()
     {
-        PlaySFX(3);
+        //PlaySFX(3);
     }
 
-    void PlayFracturedSFX()
+    void PlayRebuiltSFX()
     {
         PlaySFX(4);
     }
