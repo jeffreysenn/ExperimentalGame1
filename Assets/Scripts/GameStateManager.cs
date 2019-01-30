@@ -15,12 +15,21 @@ public class GameStateManager : MonoBehaviour
     public AudioSource m_music;
     public static GameState gameState = GameState.Clear;
 
-    [SerializeField] int losingDestroyedPillar = 3;
+    [SerializeField] int maxDestroyedPillar = 3;
     // Start is called before the first frame update
+    private void OnEnable()
+    {
+        Pillar.OnDestroyed += IncreasePillarDestroyed;
+    }
+
+    private void OnDestroy()
+    {
+        Pillar.OnDestroyed -= IncreasePillarDestroyed;
+    }
 
     private void IncreasePillarDestroyed()
     {
-        if(PillarManager.pillarsDestroyed >= losingDestroyedPillar)
+        if(PillarManager.pillarsDestroyed >= maxDestroyedPillar)
         {
             StartCoroutine(ResetGame());
         }
