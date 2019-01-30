@@ -9,6 +9,9 @@ public class MovementController : MonoBehaviour
 
     public ScoreManager scoreManager;
     public Timer timer;
+    public PillarManager pillarManager;
+
+    [SerializeField] bool canPillarBlockMovement = true;
 
     public GameObject[] playerObjs;
     private CharacterInfo[] characterInfos;
@@ -75,22 +78,42 @@ public class MovementController : MonoBehaviour
 
             if (Input.GetButtonDown("Right"))
             {
-                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].numAndRoll + new Vector2(1, 0);
-                ShowNextSprite(NextNumAndRoll);
+                Vector2 nextNumAndRoll = characterInfos[currentSpriteIndex].numAndRoll + new Vector2(1, 0);
+                int nextSpriteIndex;
+                if(DoesNextSpriteExist(nextNumAndRoll, out nextSpriteIndex))
+                {
+                    if (CanMoveToNextSprite(nextSpriteIndex))
+                    {
+                        ShowNextSprite(nextSpriteIndex);
+
+                    }
+                }
             }
 
             if (Input.GetButtonDown("Left"))
             {
-                Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].numAndRoll + new Vector2(-1, 0);
-                ShowNextSprite(NextNumAndRoll);
+                Vector2 nextNumAndRoll = characterInfos[currentSpriteIndex].numAndRoll + new Vector2(-1, 0);
+                int nextSpriteIndex;
+                if (DoesNextSpriteExist(nextNumAndRoll, out nextSpriteIndex))
+                {
+                    if (CanMoveToNextSprite(nextSpriteIndex))
+                    {
+                    ShowNextSprite(nextSpriteIndex);
+
+                    }
+                }
             }
 
             if (Input.GetButtonDown("Up"))
             {
                 if (LadderCheckAbove())
                 {
-                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].ladderAbove.GetComponent<CharacterInfo>().numAndRoll;
-                    ShowNextSprite(NextNumAndRoll);
+                    Vector2 nextNumAndRoll = characterInfos[currentSpriteIndex].ladderAbove.GetComponent<CharacterInfo>().numAndRoll;
+                    int nextSpriteIndex;
+                    if (DoesNextSpriteExist(nextNumAndRoll, out nextSpriteIndex))
+                    {
+                        ShowNextSprite(nextSpriteIndex);
+                    }
 
                 }
             }
@@ -99,8 +122,12 @@ public class MovementController : MonoBehaviour
             {
                 if (LadderCheckBelow())
                 {
-                    Vector2 NextNumAndRoll = characterInfos[currentSpriteIndex].ladderBelow.GetComponent<CharacterInfo>().numAndRoll;
-                    ShowNextSprite(NextNumAndRoll);
+                    Vector2 nextNumAndRoll = characterInfos[currentSpriteIndex].ladderBelow.GetComponent<CharacterInfo>().numAndRoll;
+                    int nextSpriteIndex;
+                    if (DoesNextSpriteExist(nextNumAndRoll, out nextSpriteIndex))
+                    {
+                        ShowNextSprite(nextSpriteIndex);
+                    }
                 }
             }
         }
@@ -119,22 +146,50 @@ public class MovementController : MonoBehaviour
         return true;
     }
 
-    private void ShowNextSprite(Vector2 NextNumAndRoll)
+    private bool DoesNextSpriteExist(Vector2 nextNumAndRoll, out int nextSpriteIndex)
     {
         for (int i = 0; i < characterInfos.Length; i++)
         {
-            if (characterInfos[i].numAndRoll == NextNumAndRoll)
+            if (characterInfos[i].numAndRoll == nextNumAndRoll)
             {
-                characterInfos[currentSpriteIndex].isActive = false;
-                characterInfos[i].isActive = true;
-                UpdateVisibility(i);
-                currentSpriteIndex = i;
-                if (OnMoved!=null)
-                {
-                    OnMoved(0);
-                }
-                break;
+                nextSpriteIndex = i;
+                return true;
             }
+        }
+        nextSpriteIndex = new int();
+        return false;
+    }
+
+    private bool CanMoveToNextSprite(int nextSpriteIndex)
+    {
+        if (!canPillarBlockMovement) { return true; }
+        if(!characterInfos[currentSpriteIndex].pillar && !characterInfos[nextSpriteIndex].pillar) { return true; }
+        else
+        {
+            int pillarRow = (int)characterInfos[currentSpriteIndex].numAndRoll.y;
+            foreach (Pillar pillar in pillarManager.pillarsOfRows[pillarRow])
+            {
+                if (pillar.m_state != PillarStates.Destroyed)
+                {
+                    if ((pillar.transform.position.x - characterInfos[currentSpriteIndex].transform.position.x) * (pillar.transform.position.x - characterInfos[nextSpriteIndex].transform.position.x) < 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private void ShowNextSprite(int nextSpriteIndex)
+    {
+        characterInfos[currentSpriteIndex].isActive = false;
+        characterInfos[nextSpriteIndex].isActive = true;
+        UpdateVisibility(nextSpriteIndex);
+        currentSpriteIndex = nextSpriteIndex;
+        if (OnMoved != null)
+        {
+            OnMoved(0);
         }
     }
 

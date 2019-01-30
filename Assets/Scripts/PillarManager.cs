@@ -9,7 +9,7 @@ public class PillarManager : MonoBehaviour
     public GameStateManager gameStateManager;
     public Pillar[] m_pillars;
 
-    List<Pillar>[] pillarsOfRows;
+    public List<Pillar>[] pillarsOfRows;
 
     public float m_activationFrequency;
     private float m_activationTime;
