@@ -12,6 +12,7 @@ public enum GameState
 
 public class GameStateManager : MonoBehaviour
 {
+    public AudioSource m_music;
     public static GameState gameState = GameState.Clear;
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class GameStateManager : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
+        m_music.Stop();
         yield return StartCoroutine(DelayExecution());
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
@@ -48,6 +50,7 @@ public class GameStateManager : MonoBehaviour
     public void StartGame()
     {
         gameState = GameState.Playing;
+        m_music.Play();
     }
 
     

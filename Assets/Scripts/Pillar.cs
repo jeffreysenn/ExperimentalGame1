@@ -35,14 +35,23 @@ public class Pillar : MonoBehaviour
     public static event PillarHandler OnDestroyed;
     public static event PillarHandler OnRebuilt;
 
+    private bool isFrozen = false;
+
     void OnEnable()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         ResetDestructTime();
+
+    }
+
+    public void SetPillarFrozen(bool setFrozen)
+    {
+        isFrozen = setFrozen;
     }
 
     void Update()
     {
+        if (isFrozen) { return; }
         if (IsDestructing && m_state != PillarStates.Destroyed)
         {
             m_destructTime -= Time.deltaTime;

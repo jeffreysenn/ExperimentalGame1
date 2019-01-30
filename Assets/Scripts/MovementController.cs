@@ -17,6 +17,7 @@ public class MovementController : MonoBehaviour
     private CharacterInfo[] characterInfos;
     private int currentSpriteIndex;
     private bool shouldStartGame = false;
+    public bool isFrozen = false;
 
     void SetCharacterInfos()
     {
@@ -76,6 +77,7 @@ public class MovementController : MonoBehaviour
             ResetGame();
         }
 
+        if (isFrozen) { return; }
         if (shouldStartGame)
         {
 
