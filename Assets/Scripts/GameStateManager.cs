@@ -19,15 +19,15 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        Pillar.OnDestroyed += IncreasePillarDestroyed;
+        Pillar.OnDestroyed += CheckGameOver;
     }
 
     private void OnDestroy()
     {
-        Pillar.OnDestroyed -= IncreasePillarDestroyed;
+        Pillar.OnDestroyed -= CheckGameOver;
     }
 
-    private void IncreasePillarDestroyed()
+    private void CheckGameOver()
     {
         if(PillarManager.pillarsDestroyed >= maxDestroyedPillar)
         {
@@ -57,11 +57,10 @@ public class GameStateManager : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
+        yield return StartCoroutine(DelayExecution());
+        if (m_music) { m_music.Stop(); }
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-        if (!m_music) { yield return null; }
-        m_music.Stop();
-        yield return StartCoroutine(DelayExecution());
     }
 
     IEnumerator DelayExecution()

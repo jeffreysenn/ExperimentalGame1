@@ -89,12 +89,12 @@ public class Pillar : MonoBehaviour
         else
         {
             m_spriteRenderer.color = Color.clear;
+            PillarManager.pillarsDestroyed++;
+            pillarManager.ReportPillarDestruction(row);
             if(OnDestroyed != null)
             {
                 OnDestroyed();
             }
-            pillarManager.ReportPillarDestruction(row);
-            PillarManager.pillarsDestroyed++;
         }
 
         if (m_audioSources.Length > (int)m_state - 1 && m_audioSources[(int)m_state - 1] != null)
