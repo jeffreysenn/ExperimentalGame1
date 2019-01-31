@@ -7,8 +7,6 @@ public class MovementController : MonoBehaviour
     public delegate void MovementHandler(int i);
     public static event MovementHandler OnMoved;
 
-
-
     public ScoreManager scoreManager;
     public Timer timer;
     public PillarManager pillarManager;
@@ -27,6 +25,8 @@ public class MovementController : MonoBehaviour
         isFrozen = true;
         frozenTimer = time;
     }
+
+    public Sprite m_gameOverSprite;
 
     void SetCharacterInfos()
     {
@@ -77,11 +77,13 @@ public class MovementController : MonoBehaviour
         ResetGame(0);
 
         //GameStateManager.OnStartGame += ResetGame;
+        GameStateManager.OnGameOver += ChangeIntoLosingSprite;
     }
 
     private void OnDisable()
     {
         //GameStateManager.OnStartGame -= ResetGame;
+        GameStateManager.OnGameOver -= ChangeIntoLosingSprite;
 
     }
 
@@ -232,6 +234,11 @@ public class MovementController : MonoBehaviour
         characterInfos[currentSpriteIndex].GetComponent<Renderer>().enabled = false;
         characterInfos[newVisibleNum].GetComponent<Renderer>().enabled = true;
 
+    }
+
+    private void ChangeIntoLosingSprite()
+    {
+        GetCurrentSprite().Lost();
     }
 
     public CharacterInfo GetCurrentSprite() { return characterInfos[currentSpriteIndex]; }

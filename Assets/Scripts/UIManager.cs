@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     {
         return GameStateManager.m_maxDestroyedPillar - PillarManager.pillarsDestroyed;
     }
+
     private void UpdateLives()
     {
         UpdateLives(GetPlayerLife());
@@ -39,6 +40,11 @@ public class UIManager : MonoBehaviour
         scoreDisplay.text = "Score: " + score.ToString();
     }
 
+    public void UpdateSystemTime()
+    {
+        scoreDisplay.text = System.DateTime.Now.ToShortTimeString();
+    }
+
     public void UpdateTime(int time)
     {
         timeDisplay.text = "Time: " + time.ToString();
@@ -46,16 +52,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLives(int p_lives)
     {
-        /*int increment = 0;
-        foreach (Image item in m_playerLives.GetComponentsInChildren<Image>())
-        {
-            item.color = Color.clear;
-            if (increment >= p_lives)
-                break;
-            else
-                increment++;
-        }*/
         if (m_playerLives == null) { return; }
+
         Image[] m_images = m_playerLives.GetComponentsInChildren<Image>();
 
         for (int i = 0; i < m_images.Length; i++)

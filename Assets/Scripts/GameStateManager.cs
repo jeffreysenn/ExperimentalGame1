@@ -16,6 +16,7 @@ public class GameStateManager : MonoBehaviour
     public static event GameStateHandler OnStartGame;
     public AudioSource m_music;
     public static GameState gameState = GameState.Clear;
+    public UIManager m_uiManager;
 
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
@@ -38,7 +39,6 @@ public class GameStateManager : MonoBehaviour
     {
         Pillar.OnDestroyed -= CheckGameOver;
     }
-
 
 
     private void CheckGameOver()
@@ -65,6 +65,11 @@ public class GameStateManager : MonoBehaviour
                 //if (OnStartGame != null) { OnStartGame(1); }
             }
         }
+
+        if (gameState == GameState.Clear)
+        {
+            m_uiManager.UpdateSystemTime();
+        }
     }
 
     public void ClearScreen()
@@ -77,7 +82,6 @@ public class GameStateManager : MonoBehaviour
         OnGameOver();
         gameState = GameState.Failed;
         yield return StartCoroutine(DelayExecution());
-        if (m_music) { m_music.Stop(); }
         SceneManager.LoadScene(0);
     }
 
@@ -90,6 +94,7 @@ public class GameStateManager : MonoBehaviour
     {
         gameState = GameState.Playing;
         SceneManager.LoadScene(i);
+
     }
 
     

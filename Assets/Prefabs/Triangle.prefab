@@ -76,7 +76,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5765, y: 0.9085}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -99,6 +99,7 @@ MonoBehaviour:
   pillar: {fileID: 0}
   ladderAbove: {fileID: 0}
   ladderBelow: {fileID: 0}
+  canFireLand: 1
 --- !u!114 &2148977820297633581
 MonoBehaviour:
   m_ObjectHideFlags: 0

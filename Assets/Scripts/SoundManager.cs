@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
         GameStateManager.OnGameOver += PlayLoosingSFX;
         Pillar.OnDestroyed += PlayCrackedSFX;
         Pillar.OnRebuilt += PlayRebuiltSFX;
+        ScoreManager.OnAddedLife += PlayScoreBonusSFX;
     }
 
     private void OnDisable()
@@ -21,6 +22,7 @@ public class SoundManager : MonoBehaviour
         FixPillar.OnRepaired -= PlayRepairSFX;
         GameStateManager.OnGameOver -= PlayLoosingSFX;
         Pillar.OnRebuilt -= PlayRebuiltSFX;
+        ScoreManager.OnAddedLife -= PlayScoreBonusSFX;
     }
 
     private void PlaySFX(int i)
@@ -58,7 +60,7 @@ public class SoundManager : MonoBehaviour
         PlaySFX(4);
     }
 
-    void PlayWreckedSFX()
+    void PlayScoreBonusSFX()
     {
         PlaySFX(5);
     }

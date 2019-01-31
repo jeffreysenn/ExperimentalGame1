@@ -23,7 +23,11 @@ public class CharacterInfo : MonoBehaviour
 
     public void FixAnimation(Pillar pillar)
     {
-        GetComponent<Animator>().SetTrigger("Fix");
+        GetComponent<Animator>().SetTrigger("Fix "+ (PillarManager.pillarsDestroyed+1).ToString());
     }
 
+    public void Lost()
+    {
+        GetComponent<Animator>().SetTrigger("Lost");
+    }
 }

@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
         timer = 0;
         preIntTime = 0;
         intTime = 0;
-        UIManagerObj.GetComponent<UIManager>().UpdateTime(intTime);
+        //UIManagerObj.GetComponent<UIManager>().UpdateTime(intTime);
 
     }
 
