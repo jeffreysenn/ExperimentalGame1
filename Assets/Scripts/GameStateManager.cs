@@ -12,6 +12,8 @@ public enum GameState
 
 public class GameStateManager : MonoBehaviour
 {
+    public delegate void GameStateHandler(int gameIndex);
+    public static event GameStateHandler OnStartGame;
     public AudioSource m_music;
     public static GameState gameState = GameState.Clear;
 
@@ -51,9 +53,10 @@ public class GameStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Start"))
+        if (gameState != GameState.Playing && Input.GetButtonDown("Start"))
         {
             StartGame();
+            if (OnStartGame != null) { OnStartGame(0); }
         }
     }
 

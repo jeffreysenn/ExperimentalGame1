@@ -107,7 +107,7 @@ public class PillarManager : MonoBehaviour
 
     void Update()
     {
-        if (GameStateManager.gameState == GameState.Clear)
+        if (GameStateManager.gameState != GameState.Playing)
         {
             return;
         }
@@ -119,7 +119,7 @@ public class PillarManager : MonoBehaviour
             {
                 m_activationPeriod = Mathf.Lerp(timeAndDifficulties[tdIndex].activationPeriod.x, timeAndDifficulties[tdIndex].activationPeriod.y, (Timer.timer - timeAndDifficulties[tdIndex].timeSlot.x)/ (timeAndDifficulties[tdIndex].timeSlot.y - timeAndDifficulties[tdIndex].timeSlot.x));
             }
-            else if(Time.time > timeAndDifficulties[tdIndex].timeSlot.y)
+            else if(Timer.timer > timeAndDifficulties[tdIndex].timeSlot.y)
             {
                 tdIndex++;
             }

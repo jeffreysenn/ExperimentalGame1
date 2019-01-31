@@ -7,6 +7,8 @@ public class MovementController : MonoBehaviour
     public delegate void MovementHandler(int i);
     public static event MovementHandler OnMoved;
 
+
+
     public ScoreManager scoreManager;
     public Timer timer;
     public PillarManager pillarManager;
@@ -29,7 +31,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    void ResetGame()
+    void ResetGame(int gameIndex)
     {
         bool hasActive = false;
         for (int i = 0; i < characterInfos.Length; i++)
@@ -65,6 +67,14 @@ public class MovementController : MonoBehaviour
     {
         SetCharacterInfos();
         ClearScreen();
+
+        GameStateManager.OnStartGame += ResetGame;
+    }
+
+    private void OnDisable()
+    {
+        GameStateManager.OnStartGame -= ResetGame;
+
     }
 
     void SetLadder(int characterIndex)
@@ -79,11 +89,6 @@ public class MovementController : MonoBehaviour
     {
         if (GameStateManager.gameState == GameState.Failed)
             return;
-
-        if (Input.GetButtonDown("Start") && !shouldStartGame)
-        {
-            ResetGame();
-        }
 
         if (isFrozen) { return; }
         if (shouldStartGame)

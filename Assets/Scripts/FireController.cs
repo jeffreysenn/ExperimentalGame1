@@ -25,8 +25,36 @@ public class FireController : MonoBehaviour
                 controlledFires.Add(allFireInfos[i]);
             }
         }
-        Debug.Log(controlledFires.Count);
 
+        ClearScreen();
+
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnStartGame += ResetFire;
+    }
+
+    private void OnDisable()
+    {
+        GameStateManager.OnStartGame -= ResetFire;
+
+    }
+
+    private void ClearScreen()
+    {
+        for (int i = 0; i < controlledFires.Count; i++)
+        {
+            if (controlledFires[i].isActive)
+            {
+                currentActiveIndex = i;
+            }
+            controlledFires[i].gameObject.GetComponent<Renderer>().enabled = false;
+        }
+    }
+
+    private void ResetFire(int gameIndex)
+    {
         for (int i = 0; i < controlledFires.Count; i++)
         {
             if (controlledFires[i].isActive)
@@ -42,6 +70,14 @@ public class FireController : MonoBehaviour
 
     private void Update()
     {
+        if (GameStateManager.gameState != GameState.Playing) { return; }
+
+
+        if(controlledFires[currentActiveIndex].characterBelow && controlledFires[currentActiveIndex].isActive && controlledFires[currentActiveIndex].characterBelow.isActive)
+        {
+            StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameStateManager>().ResetGame());
+        }
+
         movementTimer -= Time.deltaTime;
         if(movementTimer < 0)
         {
