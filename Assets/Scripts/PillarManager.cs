@@ -25,13 +25,12 @@ public class PillarManager : MonoBehaviour
     public float m_activationPeriod;
     private float m_activationTime;
 
-    public delegate void GameOverHandler();
-    public static event GameOverHandler OnGameOver;
 
     public bool m_gameOver = false;
 
     private void OnEnable()
     {
+        pillarsDestroyed = 0;
         ScoreManager.OnAddedLife += RepairAllDestroyedPillars;
     }
 
@@ -183,7 +182,6 @@ public class PillarManager : MonoBehaviour
     {
         if (ArePillarsOfRowDestroyed(rowNum))
         {
-            OnGameOver();
             m_gameOver = true;
             EnablePillars(false);
             StartCoroutine(gameStateManager.ResetGame());

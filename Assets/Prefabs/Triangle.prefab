@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3428328579352498201}
   - component: {fileID: 3428328579352498215}
   - component: {fileID: 2148977820297633581}
+  - component: {fileID: 566387559914540316}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Player
@@ -110,3 +111,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a265b7a12d7c2498d5c6473822051b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &566387559914540316
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3428328579352498200}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d725d9cb0aab08444833406f97d9305f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

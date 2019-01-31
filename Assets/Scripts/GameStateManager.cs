@@ -15,17 +15,24 @@ public class GameStateManager : MonoBehaviour
     public AudioSource m_music;
     public static GameState gameState = GameState.Clear;
 
+    public delegate void GameOverHandler();
+    public static event GameOverHandler OnGameOver;
+
     [SerializeField] int maxDestroyedPillar = 3;
+    public static int m_maxDestroyedPillar;
     // Start is called before the first frame update
     private void OnEnable()
     {
         Pillar.OnDestroyed += CheckGameOver;
+        m_maxDestroyedPillar = maxDestroyedPillar;
     }
 
     private void OnDestroy()
     {
         Pillar.OnDestroyed -= CheckGameOver;
     }
+
+
 
     private void CheckGameOver()
     {
@@ -57,6 +64,8 @@ public class GameStateManager : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
+        OnGameOver();
+        gameState = GameState.Failed;
         yield return StartCoroutine(DelayExecution());
         if (m_music) { m_music.Stop(); }
         Scene scene = SceneManager.GetActiveScene();

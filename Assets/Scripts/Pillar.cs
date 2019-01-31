@@ -53,6 +53,8 @@ public class Pillar : MonoBehaviour
     void Update()
     {
         if (isFrozen) { return; }
+        if (GameStateManager.gameState == GameState.Failed)
+            return;
         if (IsDestructing && m_state != PillarStates.Destroyed)
         {
             m_destructTime -= Time.deltaTime;

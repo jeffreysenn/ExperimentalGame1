@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     {
         MovementController.OnMoved += PlayMovementSFX;
         FixPillar.OnRepaired += PlayRepairSFX;
-        PillarManager.OnGameOver += PlayLoosingSFX;
+        GameStateManager.OnGameOver += PlayLoosingSFX;
         Pillar.OnDestroyed += PlayCrackedSFX;
         Pillar.OnRebuilt += PlayRebuiltSFX;
     }
@@ -19,7 +19,7 @@ public class SoundManager : MonoBehaviour
     {
         MovementController.OnMoved -= PlayMovementSFX;
         FixPillar.OnRepaired -= PlayRepairSFX;
-        PillarManager.OnGameOver -= PlayLoosingSFX;
+        GameStateManager.OnGameOver -= PlayLoosingSFX;
         Pillar.OnRebuilt -= PlayRebuiltSFX;
     }
 

@@ -77,7 +77,7 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pillarManager.m_gameOver)
+        if (GameStateManager.gameState == GameState.Failed)
             return;
 
         if (Input.GetButtonDown("Start") && !shouldStartGame)

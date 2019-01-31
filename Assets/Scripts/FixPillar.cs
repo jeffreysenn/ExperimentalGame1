@@ -20,6 +20,8 @@ public class FixPillar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameStateManager.gameState == GameState.Failed)
+            return;
         if (Input.GetButtonDown("Action1"))
         {
             pillar = GetComponent<MovementController>().GetCurrentSprite().pillar;
