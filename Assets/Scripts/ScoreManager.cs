@@ -35,9 +35,9 @@ public class ScoreManager : MonoBehaviour
 
     public void AddLife()
     {
-        if(OnAddedLife != null) { OnAddedLife(); }
         PillarManager.pillarsDestroyed = 0;
         lastScoreWhenAddedLife += addLifeScore;
+        if(OnAddedLife != null) { OnAddedLife(); }
     }
 
     public void ResetScore()

@@ -61,7 +61,7 @@ public class MovementController : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         SetCharacterInfos();
         ClearScreen();
@@ -214,4 +214,6 @@ public class MovementController : MonoBehaviour
     }
 
     public CharacterInfo GetCurrentSprite() { return characterInfos[currentSpriteIndex]; }
+
+    public CharacterInfo[] GetCharacterInfos() { return characterInfos; }
 }

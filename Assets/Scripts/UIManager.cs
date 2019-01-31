@@ -13,11 +13,16 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         Pillar.OnDestroyed += UpdateLives;
+
+        ScoreManager.OnAddedLife += UpdateLives;
+
     }
 
     private void OnDisable()
     {
         Pillar.OnDestroyed -= UpdateLives;
+        ScoreManager.OnAddedLife -= UpdateLives;
+
     }
 
     public int GetPlayerLife()

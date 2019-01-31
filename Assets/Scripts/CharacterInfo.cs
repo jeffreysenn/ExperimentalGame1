@@ -9,6 +9,8 @@ public class CharacterInfo : MonoBehaviour
     public Pillar pillar;
     public CharacterInfo ladderAbove, ladderBelow;
 
+    public bool canFireLand = true;
+
     private void OnEnable()
     {
         FixPillar.OnRepaired += FixAnimation;
