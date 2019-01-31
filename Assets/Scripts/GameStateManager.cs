@@ -24,12 +24,15 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] int maxDestroyedPillar = 3;
     public static int m_maxDestroyedPillar;
 
+    [SerializeField] bool showTime = false;
+     
+    private bool hasCalled = false;
+    
     // Start is called before the first frame update
     private void OnEnable()
     {
-        DontDestroyOnLoad(gameObject);
         //gameState = GameState.Clear;
-
+        hasCalled = false;
 
         Pillar.OnDestroyed += CheckGameOver;
         FireController.OnFireHit += CheckGameOver;
@@ -70,7 +73,7 @@ public class GameStateManager : MonoBehaviour
             }
         }
 
-        if (gameState == GameState.Clear)
+        if (showTime)
         {
             m_uiManager.UpdateSystemTime();
         }
@@ -83,8 +86,8 @@ public class GameStateManager : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
-        OnGameOver();
         gameState = GameState.Failed;
+        OnGameOver();
         yield return StartCoroutine(DelayExecution());
         SceneManager.LoadScene(0);
     }

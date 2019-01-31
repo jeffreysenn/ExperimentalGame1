@@ -1947,6 +1947,11 @@ PrefabInstance:
       propertyPath: m_uiManager
       value: 
       objectReference: {fileID: 2038501227}
+    - target: {fileID: 519350453827818244, guid: d73c5dd00fdf3ee44a22cc4cbf6970b3,
+        type: 3}
+      propertyPath: showTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d73c5dd00fdf3ee44a22cc4cbf6970b3, type: 3}
 --- !u!1001 &965937794

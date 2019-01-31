@@ -16,6 +16,7 @@ public class FireController : MonoBehaviour
     Vector2 movementDirection;
     [SerializeField] float movementFrozenTime = 1;
     private MovementController movementController;
+    [SerializeField] int hitDamage = 1;
 
 
     // Start is called before the first frame update
@@ -93,7 +94,7 @@ public class FireController : MonoBehaviour
             && !movementController.isFrozen)
         {
             movementController.FreezeForSeconds(movementFrozenTime);
-            PillarManager.pillarsDestroyed++;
+            PillarManager.pillarsDestroyed += hitDamage;
 
             if (OnFireHit!= null) { OnFireHit(); }
         }

@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
         Pillar.OnDestroyed += PlayCrackedSFX;
         Pillar.OnRebuilt += PlayRebuiltSFX;
         ScoreManager.OnAddedLife += PlayScoreBonusSFX;
+        FireController.OnFireHit += PlayFireHitSFX;
     }
 
     private void OnDisable()
@@ -23,11 +24,18 @@ public class SoundManager : MonoBehaviour
         GameStateManager.OnGameOver -= PlayLoosingSFX;
         Pillar.OnRebuilt -= PlayRebuiltSFX;
         ScoreManager.OnAddedLife -= PlayScoreBonusSFX;
+        FireController.OnFireHit -= PlayFireHitSFX;
+
+    }
+
+    void PlayFireHitSFX()
+    {
+        PlaySFX(6);
     }
 
     private void PlaySFX(int i)
     {
-        if(i > m_audioSources.Length) { return; }
+        if(i >= m_audioSources.Length) { return; }
         if (m_audioSources[i] != null)
         {
             if (i == 3 && m_audioSources[3] != null)
