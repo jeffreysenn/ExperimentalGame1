@@ -107,13 +107,18 @@ public class PillarManager : MonoBehaviour
 
     void Update()
     {
-        if (GameStateManager.gameState != GameState.Playing)
+        //if (GameStateManager.gameState != GameState.Playing)
+        //{
+        //    return;
+        //}
+
+        if (GameStateManager.gameState == GameState.Failed)
         {
             return;
         }
 
 
-        if(tdIndex < timeAndDifficulties.Length)
+        if (tdIndex < timeAndDifficulties.Length)
         {
             if ((Timer.timer - timeAndDifficulties[tdIndex].timeSlot.x) * (Timer.timer - timeAndDifficulties[tdIndex].timeSlot.y) < 0)
             {

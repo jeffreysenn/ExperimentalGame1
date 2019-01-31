@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
             else
                 increment++;
         }*/
+        if (m_playerLives == null) { return; }
         Image[] m_images = m_playerLives.GetComponentsInChildren<Image>();
 
         for (int i = 0; i < m_images.Length; i++)

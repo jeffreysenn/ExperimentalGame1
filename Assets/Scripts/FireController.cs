@@ -34,7 +34,9 @@ public class FireController : MonoBehaviour
             }
         }
 
-        ClearScreen();
+        //ClearScreen();
+
+        ResetFire(0);
 
     }
 
@@ -78,10 +80,14 @@ public class FireController : MonoBehaviour
 
     private void Update()
     {
-        if (GameStateManager.gameState != GameState.Playing) { return; }
+        // if (GameStateManager.gameState != GameState.Playing) { return; }
 
+        if (GameStateManager.gameState == GameState.Failed)
+        {
+            return;
+        }
 
-        if(controlledFires[currentActiveIndex].characterBelow 
+        if (controlledFires[currentActiveIndex].characterBelow 
             && controlledFires[currentActiveIndex].isActive 
             && controlledFires[currentActiveIndex].characterBelow.isActive
             && !movementController.isFrozen)

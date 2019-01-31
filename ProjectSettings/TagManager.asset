@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pillar
   - Fire
+  - PlayerController
   layers:
   - Default
   - TransparentFX

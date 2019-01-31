@@ -22,9 +22,14 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField] int maxDestroyedPillar = 3;
     public static int m_maxDestroyedPillar;
+
     // Start is called before the first frame update
     private void OnEnable()
     {
+        DontDestroyOnLoad(gameObject);
+        //gameState = GameState.Clear;
+
+
         Pillar.OnDestroyed += CheckGameOver;
         m_maxDestroyedPillar = maxDestroyedPillar;
     }
@@ -42,21 +47,23 @@ public class GameStateManager : MonoBehaviour
         {
             StartCoroutine(ResetGame());
         }
-    }
-
-
-    void Start()
-    {
-        gameState = GameState.Clear;
-    }
+    }   
 
     // Update is called once per frame
     void Update()
     {
-        if (gameState != GameState.Playing && Input.GetButtonDown("Start"))
+        if (gameState != GameState.Playing)
         {
-            StartGame();
-            if (OnStartGame != null) { OnStartGame(0); }
+            if (Input.GetButtonDown("Start1"))
+            {
+                StartGame(1);
+                //if (OnStartGame != null) { OnStartGame(0); }
+            }
+            else if (Input.GetButtonDown("Start2"))
+            {
+                StartGame(2);
+                //if (OnStartGame != null) { OnStartGame(1); }
+            }
         }
     }
 
@@ -71,8 +78,7 @@ public class GameStateManager : MonoBehaviour
         gameState = GameState.Failed;
         yield return StartCoroutine(DelayExecution());
         if (m_music) { m_music.Stop(); }
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator DelayExecution()
@@ -80,14 +86,10 @@ public class GameStateManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    public void StartGame()
+    public void StartGame(int i)
     {
         gameState = GameState.Playing;
-        if (m_music)
-        {
-        m_music.Play();
-
-        }
+        SceneManager.LoadScene(i);
     }
 
     

@@ -74,13 +74,14 @@ public class MovementController : MonoBehaviour
     {
         SetCharacterInfos();
         ClearScreen();
+        ResetGame(0);
 
-        GameStateManager.OnStartGame += ResetGame;
+        //GameStateManager.OnStartGame += ResetGame;
     }
 
     private void OnDisable()
     {
-        GameStateManager.OnStartGame -= ResetGame;
+        //GameStateManager.OnStartGame -= ResetGame;
 
     }
 
