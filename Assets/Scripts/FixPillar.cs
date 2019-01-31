@@ -34,7 +34,7 @@ public class FixPillar : MonoBehaviour
             {
                 OnRepaired(pillar);
             }
-            GetComponent<MovementController>().isFrozen = true;
+            GetComponent<MovementController>().FreezeForSeconds(fixFrozenTime);
         }
 
         if (shouldStartTimer) { frozenTimer -= Time.deltaTime; }
@@ -42,7 +42,6 @@ public class FixPillar : MonoBehaviour
         {
             pillar.Repair();
             pillar.SetPillarFrozen(false);
-            GetComponent<MovementController>().isFrozen = false;
 
             shouldStartTimer = false;
             frozenTimer = fixFrozenTime;

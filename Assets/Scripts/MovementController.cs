@@ -20,6 +20,13 @@ public class MovementController : MonoBehaviour
     private int currentSpriteIndex;
     private bool shouldStartGame = false;
     public bool isFrozen = false;
+    private float frozenTimer;
+
+    public void FreezeForSeconds(float time)
+    {
+        isFrozen = true;
+        frozenTimer = time;
+    }
 
     void SetCharacterInfos()
     {
@@ -90,7 +97,15 @@ public class MovementController : MonoBehaviour
         if (GameStateManager.gameState == GameState.Failed)
             return;
 
-        if (isFrozen) { return; }
+        if (isFrozen)
+        {
+            frozenTimer -= Time.deltaTime;
+            if(frozenTimer < 0)
+            {
+                isFrozen = false;
+            }
+            return;
+        }
         if (shouldStartGame)
         {
 

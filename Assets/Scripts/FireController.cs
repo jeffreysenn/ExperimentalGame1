@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FireController : MonoBehaviour
 {
+    public delegate void FireHandler();
+    public static event FireHandler OnFireHit;
+
     [SerializeField] int controlledRow;
     List<FireInfo> controlledFires = new List<FireInfo>();
     [SerializeField] float movementInterval = 1;
@@ -11,10 +14,15 @@ public class FireController : MonoBehaviour
     private int currentActiveIndex = 0;
     [SerializeField] Vector2 initialMovementDirection = new Vector2(1, 0);
     Vector2 movementDirection;
+    [SerializeField] float movementFrozenTime = 1;
+    private MovementController movementController;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        movementController = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<MovementController>();
+
         GameObject[] allFireObjs = GameObject.FindGameObjectsWithTag("Fire");
         FireInfo[] allFireInfos = new FireInfo[allFireObjs.Length];
         for (int i = 0; i < allFireInfos.Length; i++)
@@ -73,9 +81,13 @@ public class FireController : MonoBehaviour
         if (GameStateManager.gameState != GameState.Playing) { return; }
 
 
-        if(controlledFires[currentActiveIndex].characterBelow && controlledFires[currentActiveIndex].isActive && controlledFires[currentActiveIndex].characterBelow.isActive)
+        if(controlledFires[currentActiveIndex].characterBelow 
+            && controlledFires[currentActiveIndex].isActive 
+            && controlledFires[currentActiveIndex].characterBelow.isActive
+            && !movementController.isFrozen)
         {
-            StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameStateManager>().ResetGame());
+            movementController.FreezeForSeconds(movementFrozenTime);
+            if(OnFireHit!= null) { OnFireHit(); }
         }
 
         movementTimer -= Time.deltaTime;
