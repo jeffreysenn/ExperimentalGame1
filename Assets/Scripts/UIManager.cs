@@ -13,8 +13,8 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         Pillar.OnDestroyed += UpdateLives;
-
         ScoreManager.OnAddedLife += UpdateLives;
+        FireController.OnFireHit += UpdateLives;
 
     }
 
@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     {
         Pillar.OnDestroyed -= UpdateLives;
         ScoreManager.OnAddedLife -= UpdateLives;
+        FireController.OnFireHit -= UpdateLives;
+
 
     }
 

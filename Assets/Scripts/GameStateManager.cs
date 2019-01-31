@@ -32,12 +32,16 @@ public class GameStateManager : MonoBehaviour
 
 
         Pillar.OnDestroyed += CheckGameOver;
+        FireController.OnFireHit += CheckGameOver;
+
         m_maxDestroyedPillar = maxDestroyedPillar;
     }
 
     private void OnDestroy()
     {
         Pillar.OnDestroyed -= CheckGameOver;
+        FireController.OnFireHit -= CheckGameOver;
+
     }
 
 

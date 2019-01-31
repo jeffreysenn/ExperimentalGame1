@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     void OnEnable()
     {
         FixPillar.OnRepaired += AddScore;
+
         UIManager = UIManagerObj.GetComponent<UIManager>();
         if(UIManager == null) { return; }
         UIManager.UpdateScore(score);
@@ -23,8 +24,11 @@ public class ScoreManager : MonoBehaviour
     void OnDisable()
     {
         FixPillar.OnRepaired -= AddScore;
+
     }
-    
+
+
+
     void AddScore(Pillar pillar)
     {
         if(GameStateManager.gameState != GameState.Clear)

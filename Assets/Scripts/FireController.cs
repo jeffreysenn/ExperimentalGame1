@@ -7,7 +7,7 @@ public class FireController : MonoBehaviour
     public delegate void FireHandler();
     public static event FireHandler OnFireHit;
 
-    [SerializeField] int controlledRow;
+    [SerializeField] int controlledRow = 0;
     List<FireInfo> controlledFires = new List<FireInfo>();
     [SerializeField] float movementInterval = 1;
     private float movementTimer;
@@ -93,7 +93,9 @@ public class FireController : MonoBehaviour
             && !movementController.isFrozen)
         {
             movementController.FreezeForSeconds(movementFrozenTime);
-            if(OnFireHit!= null) { OnFireHit(); }
+            PillarManager.pillarsDestroyed++;
+
+            if (OnFireHit!= null) { OnFireHit(); }
         }
 
         movementTimer -= Time.deltaTime;
