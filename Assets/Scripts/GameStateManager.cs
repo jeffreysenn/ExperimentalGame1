@@ -59,6 +59,11 @@ public class GameStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Exit"))
+        {
+            Application.Quit();
+        }
+
         if (gameState != GameState.Playing)
         {
             if (Input.GetButtonDown("Start1"))
@@ -72,6 +77,7 @@ public class GameStateManager : MonoBehaviour
                 //if (OnStartGame != null) { OnStartGame(1); }
             }
         }
+
 
         if (showTime)
         {

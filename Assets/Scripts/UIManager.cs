@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        scoreDisplay.text = "Score: " + score.ToString();
+        scoreDisplay.text = score.ToString();
     }
 
     public void UpdateSystemTime()

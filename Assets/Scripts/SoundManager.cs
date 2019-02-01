@@ -30,7 +30,8 @@ public class SoundManager : MonoBehaviour
 
     void PlayFireHitSFX()
     {
-        PlaySFX(6);
+        if (PillarManager.pillarsDestroyed < 3)
+            PlaySFX(6);
     }
 
     private void PlaySFX(int i)
